@@ -1,45 +1,44 @@
 import React, {Component} from 'react';
-/*  * as actions 一种特殊的语法相当于将actions对象中的内容全部导出
-* actions 仅代表对象的名称，名称也可以为xx
-* */
-import {handleadd,handledecrement} from '../redux/actions'
 
 class App extends Component {
+  state={
+    count:0
+  }
   handleAdd = ()=>{
   //  获取select值
-    const num = this.select.value *1;
-    const count = this.props.store.getState();
+    const num = this.select.value;
+    let {count} = this.state;
   //  进行运算  更新state
-    console.log(count);
-    // debugger
-    this.props.store.dispatch(handleadd(num))
+    this.setState({count:count + num * 1})
   }
   handleDecrement = () => {
     //  获取select值
-    const num = this.select.value * 1;
+    const num = this.select.value;
+    let {count} = this.state;
     //  进行运算  更新state
-    this.props.store.dispatch(handledecrement(num))
+    this.setState({count:count - num * 1})
   }
   handleOdd = () => {
     //  获取select值
-    const num = this.select.value * 1;
+    const num = this.select.value;
+    let {count} = this.state;
     //  进行运算
     if(num%2===1){
-      this.props.store.dispatch(handleadd(num))
-
+      this.setState({count:count + num*1})
     }
   }
   handleAsync = () => {
     //  获取select值
-    const num = this.select.value * 1;
+    const num = this.select.value;
+    let {count} = this.state;
     setTimeout(()=>{
-      this.props.store.dispatch(handleadd(num))
+      this.setState({count:count + num*1})
     },1000)
   }
   render () {
     return (
       <div>
-        <h2>click {this.props.store.getState()} times</h2>
+        <h2>click {this.state.count} times</h2>
         <select ref={select => this.select = select}>
           <option value="1">1</option>
           <option value="2">2</option>
